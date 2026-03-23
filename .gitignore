@@ -1,0 +1,113 @@
+# ==============================================
+# 1. Python 基础运行缓存/编译文件（必选）
+# ==============================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+# Conda虚拟环境
+conda_env/
+.conda/
+# Pipenv/Poetry缓存
+Pipfile.lock
+poetry.lock
+.venv/
+
+# ==============================================
+# 2. 编辑器/IDE 配置（适配 PyCharm + VS Code）
+# ==============================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*.ipr
+*.iws
+*.iml
+# PyCharm临时文件
+*.csv.*
+*.xlsx.*
+# Jupyter Notebook检查点
+.ipynb_checkpoints/
+*_checkpoint.ipynb
+
+# ==============================================
+# 3. 机器学习项目特有的大文件/资源（核心）
+# ==============================================
+# 压缩包/数据集（核心忽略，避免仓库体积爆炸）
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar
+data/
+datasets/
+dataset/
+Datasets/
+raw_data/
+processed_data/
+# 模型权重/缓存（所有框架的模型文件）
+*.pth
+*.pt
+*.h5
+*.ckpt
+*.onnx
+*.pb
+*.saved_model/
+*.ckpt.index
+*.ckpt.data-00000-of-00001
+# 图片/可视化结果
+*.jpg
+*.png
+*.jpeg
+*.gif
+*.svg
+*.bmp
+# 实验报告/大文件（按需注释取消）
+# *.pdf  # 若需要提交PDF报告，删除此行前面的#
+# *.docx # 若需要提交Word报告，删除此行前面的#
+
+# ==============================================
+# 4. 日志/临时文件/输出（机器学习实验专属）
+# ==============================================
+*.log
+*.tmp
+*.temp
+output/
+results/
+runs/  # TensorBoard日志
+lightning_logs/  # PyTorch Lightning日志
+wandb/  # Weights & Biases缓存
+mlruns/  # MLflow日志
+# 训练过程临时文件
+*.npy
+*.npz
+*.pickle
+*.pkl
+# 输出的预测结果
+predictions/
+submissions/
+
+# ==============================================
+# 5. 系统/其他无关文件
+# ==============================================
+.DS_Store  # Mac系统文件
+Thumbs.db  # Windows系统文件
+*.bak
+*.old
+*.swp
+# 敏感文件（密钥/配置）
+.env
+.env.*
+*.secret
+*.key
+token.txt
+config_dev.py  # 开发环境配置（含密码/路径）
+# 本地测试文件
+test_*.py
+debug_*.py
