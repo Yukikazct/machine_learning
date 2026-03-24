@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-图片爬虫脚本：爬取指定二分类图片各50张，自动存入项目根目录的data文件夹
-运行方式：任意目录执行 python code/crawler.py 均可
-可修改：CLASS_LIST 替换为自己的二分类类别（如['building', 'forest']）
-"""
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -13,9 +7,9 @@ import time
 HEADERS = {  # 模拟浏览器，避免反爬
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
 }
-CLASS_LIST = ['building', 'mountain']  # 二分类类别，可替换为['建筑', '森林']等
-IMG_NUM = 50  # 每个类别爬取50张（匹配实验要求）
-BASE_URL = 'https://cn.bing.com/images/search?q={}&first={}'  # 必应图片（反爬弱，适合新手）
+CLASS_LIST = ['building', 'mountain']  # 二分类类别
+IMG_NUM = 50  # 每个类别爬取50张
+BASE_URL = 'https://cn.bing.com/images/search?q={}&first={}'  # 必应图片
 
 # ===================== 2. 自动计算路径（核心：无需手动修改）=====================
 # 获取当前爬虫脚本（code.py）的绝对路径

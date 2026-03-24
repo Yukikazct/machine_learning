@@ -46,7 +46,6 @@ def load_evaluation_data():
     return y_val, y_val_pred, model_name
 
 def cal_confusion_matrix_manual(y_true, y_pred):
-    """自行编写：计算混淆矩阵+TP/FP/FN/TN（实验核心要求）"""
     cm = np.zeros((2, 2), dtype=int)
     TP = np.sum((y_true == POS_LABEL) & (y_pred == POS_LABEL))
     FP = np.sum((y_true == NEG_LABEL) & (y_pred == POS_LABEL))
@@ -119,7 +118,7 @@ def error_analysis_manual(y_true, y_pred):
         print(f"错误样本索引：{error_idx.tolist()[:10]}")  # 显示前10个
         print(f"错误标签示例：{[(y_true[i], y_pred[i]) for i in error_idx[:5]]}")
     # 误差归因（贴合实验要求：像素级比较的影响）
-    print(f"\n📌 像素级比较（1-NN）分类错误的核心原因：")
+    print(f"\n 像素级比较（1-NN）分类错误的核心原因：")
     reasons = [
         "1. 背景干扰：目标物体占比小，天空/岩石等背景像素主导匹配",
         "2. 像素相似：建筑岩石墙面/玻璃反光与山脉像素分布高度相似",
@@ -130,7 +129,7 @@ def error_analysis_manual(y_true, y_pred):
     ]
     for idx, reason in enumerate(reasons, 1):
         print(f"   {reason}")
-    print(f"\n✅ 实验6完成！混淆矩阵窗口已显示，终端结果可复制至实验报告")
+    print(f"\n 实验6完成！混淆矩阵窗口已显示")
 
 if __name__ == '__main__':
     # 全局异常捕获，显示具体错误
@@ -139,5 +138,5 @@ if __name__ == '__main__':
         model_evaluation(y_val, y_val_pred, model_name)  # 终端打印+窗口可视化
         error_analysis_manual(y_val, y_val_pred)
     except Exception as e:
-        print(f"\n❌ 执行错误：{type(e).__name__} - {str(e)}")
-        print("👉 解决：1.检查data/processed下是否有y_val.npy和预测npy 2.确认路径正确")
+        print(f"\n 执行错误：{type(e).__name__} - {str(e)}")
+        print("解决：1.检查data/processed下是否有y_val.npy和预测npy 2.确认路径正确")

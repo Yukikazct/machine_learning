@@ -25,7 +25,7 @@ def load_split_data():
     X_val = np.load(os.path.join(PROCESSED_ROOT, 'X_val.npy'))
     y_train = np.load(os.path.join(PROCESSED_ROOT, 'y_train.npy'))
     y_val = np.load(os.path.join(PROCESSED_ROOT, 'y_val.npy'))
-    print(f"✅ 加载实验4拆分数据完成")
+    print(f" 加载实验4拆分数据完成")
     print(f"训练集：{X_train.shape} | 验证集：{X_val.shape}")
     return X_train, X_val, y_train, y_val
 
@@ -70,7 +70,7 @@ def knn_manual_implement(X_train, X_val, y_train, y_val):
     # 打印结果
     print("\n===== 实验5：手动编写版1-NN模型结果（验证集） =====")
     print(f"1-NN验证集准确率：{acc:.4f} ({acc*100:.2f}%)")
-    print(f"✅ 预测结果已保存：y_val_pred_man.npy")
+    print(f" 预测结果已保存：y_val_pred_man.npy")
     return y_val_pred, acc
 
 if __name__ == '__main__':
