@@ -17,7 +17,7 @@ mu_mle_1d, sigma2_mle_1d = mle_univariate(x_A1)
 
 # 打印一元结果
 print('='*60)
-print('🔹 一元MLE估计结果（簇A X1维度）')
+print(' 一元MLE估计结果（簇A X1维度）')
 print(f'估计均值：{mu_mle_1d:.4f} \t真实均值：1.0000')
 print(f'估计方差：{sigma2_mle_1d:.4f} \t真实方差：1.0000')
 print('='*60)

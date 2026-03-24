@@ -70,8 +70,9 @@ class GMM_EM:
             new_ll = self.calculate_log_likelihood(X)
             self.log_likelihoods.append(new_ll)
             delta_ll = new_ll - self.log_likelihoods[-2]
+            # ====================== 核心修改：打印收敛时的deltaL ======================
             if delta_ll < self.tol:
-                print(f'EM converged at iteration {iter+1}')
+                print(f'EM converged at iteration {iter+1}, deltaL = {delta_ll:.8f}')
                 break
         if iter == self.max_iter - 1:
             print('Max iterations reached')
@@ -94,7 +95,7 @@ print('='*70)
 # 保存参数
 np.savez('gmm_em_final_params.npz', pi=pi_final, mu=mu_final, cov=cov_final, log_likelihoods=gmm_model.log_likelihoods)
 
-# ====================== 可视化对比（全英文，Mac完美显示） ======================
+# 可视化对比
 kmeans_model = KMeans(n_clusters=2, random_state=42).fit(data_all)
 
 def visualize_comparison():
