@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 # 加载数据集
 data = np.load('gmm_data.npz')
 data_all = data['data_all']
-data_A = data['data_A']
-data_B = data['data_B']
+data_A = data['data_A']  # 真实: 均值 [1,1]
+data_B = data['data_B']  # 真实: 均值 [4,4]
 
 # 1. 定义GMM-EM算法类
 class GMM_EM:
@@ -70,7 +70,7 @@ class GMM_EM:
             new_ll = self.calculate_log_likelihood(X)
             self.log_likelihoods.append(new_ll)
             delta_ll = new_ll - self.log_likelihoods[-2]
-            # ====================== 核心修改：打印收敛时的deltaL ======================
+            # 打印收敛时的迭代次数 + deltaL
             if delta_ll < self.tol:
                 print(f'EM converged at iteration {iter+1}, deltaL = {delta_ll:.8f}')
                 break
@@ -82,14 +82,25 @@ class GMM_EM:
 gmm_model = GMM_EM(K=2, tol=1e-6)
 pi_final, mu_final, cov_final = gmm_model.fit(data_all)
 
+# 修复：校正GMM分量顺序，对应正确的A/B簇
+# 按照均值的大小排序，强制 mu1 → 簇A(1,1)，mu2 → 簇B(4,4)
+order = np.argsort(mu_final[:, 0])  # 根据均值第一个元素升序排列
+pi_final = pi_final[order]
+mu_final = mu_final[order]
+cov_final = cov_final[order]
+# 把校正后的参数赋值回模型（保证可视化正确）
+gmm_model.pi = pi_final
+gmm_model.mu = mu_final
+gmm_model.cov = cov_final
+
 # 打印结果
 print('\n' + '='*70)
 print('GMM-EM Final Parameters')
-print(f'Weights: π1={pi_final[0]:.4f}, π2={pi_final[1]:.4f}')
-print(f'Mean μ1: {mu_final[0].round(4)}')
-print(f'Mean μ2: {mu_final[1].round(4)}')
-print(f'Covariance Σ1:\n{cov_final[0].round(4)}')
-print(f'Covariance Σ2:\n{cov_final[1].round(4)}')
+print(f'Weights: π1(簇A)={pi_final[0]:.4f}, π2(簇B)={pi_final[1]:.4f}')
+print(f'Mean μ1(簇A): {mu_final[0].round(4)}')
+print(f'Mean μ2(簇B): {mu_final[1].round(4)}')
+print(f'Covariance Σ1(簇A):\n{cov_final[0].round(4)}')
+print(f'Covariance Σ2(簇B):\n{cov_final[1].round(4)}')
 print('='*70)
 
 # 保存参数
