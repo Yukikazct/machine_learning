@@ -53,7 +53,7 @@ img_paths = []
 for class_name in ["mountain", "building"]:
     class_dir = os.path.join(root_dir, class_name)
     if not os.path.exists(class_dir):
-        print(f"⚠️  警告：文件夹 {class_dir} 不存在，请检查路径！")
+        print(f"  警告：文件夹 {class_dir} 不存在，请检查路径！")
         continue
 
     for filename in os.listdir(class_dir):
@@ -69,16 +69,16 @@ X = np.array(features)
 y_true = np.array(labels_true)
 
 if len(X) == 0:
-    print("❌ 错误：没有加载到任何图片！请检查图片和路径。")
+    print(" 错误：没有加载到任何图片！请检查图片和路径。")
     exit()
 
-print(f"✅ 数据加载完成！共读取 {X.shape[0]} 张图片，特征维度 {X.shape[1]}")
+print(f" 数据加载完成！共读取 {X.shape[0]} 张图片，特征维度 {X.shape[1]}")
 print(f"类别分布：山 (0): {np.sum(y_true==0)} 张，建筑 (1): {np.sum(y_true==1)} 张")
 
 K = 2
 
 if len(X) < K:
-    print(f"❌ 错误：样本数量 ({len(X)}) 小于聚类数 ({K})")
+    print(f" 错误：样本数量 ({len(X)}) 小于聚类数 ({K})")
     exit()
 
 labels_pred, centers = kmeans(X, K)
@@ -107,14 +107,14 @@ print(f"聚类错误：{n_incorrect} 张 ({n_incorrect/len(y_true)*100:.2f}%)")
 print(f"聚类准确率：{accuracy:.2%}")
 
 if n_incorrect > 0:
-    print(f"\n📋 错误样本分析:")
+    print(f"\n 错误样本分析:")
     incorrect_indices = np.where(incorrect_mask)[0]
     for idx in incorrect_indices[:min(5, n_incorrect)]:
         true_label = ['山', '建筑'][y_true[idx]]
         pred_label = ['山', '建筑'][labels_pred_aligned[idx]]
         print(f"  - 图片 {os.path.basename(img_paths[idx])}: 真实={true_label}, 预测={pred_label}")
 
-print(f"\n🎨 任务 C：可视化聚类中心")
+print(f"\n 任务 C：可视化聚类中心")
 print(f"=" * 50)
 
 plt.figure(figsize=(15, 5))
@@ -134,7 +134,7 @@ plt.tight_layout()
 plt.show()
 
 if n_incorrect > 0:
-    print(f"\n🔍 错误样本可视化分析:")
+    print(f"\n 错误样本可视化分析:")
     n_show = min(n_incorrect, 10)
     incorrect_indices = np.where(incorrect_mask)[0][:n_show]
     
@@ -150,14 +150,14 @@ if n_incorrect > 0:
         true_label = ['山', '建筑'][y_true[idx]]
         pred_label = ['山', '建筑'][labels_pred_aligned[idx]]
         
-        plt.title(f"❌ 分类错误\n真实：{true_label}\n预测：{pred_label}", 
+        plt.title(f" 分类错误\n真实：{true_label}\n预测：{pred_label}",
                  fontsize=10, color='red')
         plt.axis('off')
     
     plt.tight_layout()
     plt.show()
 
-print(f"\n📊 正确与错误样本对比展示:")
+print(f"\n 正确与错误样本对比展示:")
 
 n_correct_show = min(5, n_correct)
 n_incorrect_show = min(5, n_incorrect)
@@ -173,7 +173,7 @@ if total_show > 0:
         img = Image.open(img_paths[idx])
         plt.imshow(img)
         true_label = ['山', '建筑'][y_true[idx]]
-        plt.title(f"✅ 正确\n真实：{true_label}\n预测：{true_label}", 
+        plt.title(f" 正确\n真实：{true_label}\n预测：{true_label}",
                  fontsize=9, color='green')
         plt.axis('off')
     
@@ -185,14 +185,14 @@ if total_show > 0:
         plt.imshow(img)
         true_label = ['山', '建筑'][y_true[idx]]
         pred_label = ['山', '建筑'][labels_pred_aligned[idx]]
-        plt.title(f"❌ 错误\n真实：{true_label}\n预测：{pred_label}", 
+        plt.title(f" 错误\n真实：{true_label}\n预测：{pred_label}",
                  fontsize=9, color='red')
         plt.axis('off')
     
     plt.tight_layout()
     plt.show()
 
-print(f"\n💡 聚类结果分析总结:")
+print(f"\n 聚类结果分析总结:")
 print(f"=" * 50)
 print(f"1. 数据集包含 {len(y_true)} 张图像，分为 2 类（山和建筑）")
 print(f"2. 使用 K-Means 算法进行无监督聚类 (K=2)")
@@ -200,12 +200,12 @@ print(f"3. 最终聚类准确率为：{accuracy:.2%}")
 if accuracy >= 0.8:
     print(f"4. 评价：聚类效果良好！✅")
 elif accuracy >= 0.6:
-    print(f"4. 评价：聚类效果中等，有一定分类错误 ⚠️")
+    print(f"4. 评价：聚类效果中等，有一定分类错误 ️")
 else:
-    print(f"4. 评价：聚类效果较差，建议优化特征提取 🔧")
+    print(f"4. 评价：聚类效果较差，建议优化特征提取 ")
 
 if n_incorrect > 0:
-    print(f"\n📝 可能的错误原因分析:")
+    print(f"\n 可能的错误原因分析:")
     print(f"  - 某些山景和建筑景观的视觉特征相似（如山中包含建筑物）")
     print(f"  - 图像颜色、纹理特征不够区分明显")
     print(f"  - K-Means 对初始值敏感，可能陷入局部最优")

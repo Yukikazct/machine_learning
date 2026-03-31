@@ -32,7 +32,7 @@ def kmeans(data, K, max_iter=100, tol=1e-6):
     return labels, centers
 
 # ---------------------- 1. 读取并处理图片 ----------------------
-img = Image.open("/Users/a/Desktop/机器学习/实验02/实验02-菜市场.jpg")
+img = Image.open("/Users/a/Desktop/机器学习与模式识别/实验2聚类与联合概率分布/实验02-菜市场.jpg")
 img = np.array(img)
 H, W, C = img.shape
 # 转换为(N,3)像素矩阵
