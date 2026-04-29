@@ -1,3 +1,4 @@
+# 实验1：逻辑回归损失函数几何性质（MSE与交叉熵对比）
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -32,6 +33,11 @@ def cross_entropy_loss(y, y_hat):
 # 2. 实验数据
 x = np.array([-4.0, -2.0, -0.5, 1.0, 3.0, 5.0])
 y = np.array([0, 0, 1, 0, 1, 1])
+
+# ===================== 保存数据集到本地 =====================
+np.save("exp08_task1_x.npy", x)    # 保存特征x
+np.save("exp08_task1_y.npy", y)    # 保存标签y
+print("实验1数据集已保存：exp08_task1_x.npy、exp08_task1_y.npy")
 
 # 3. 遍历w计算损失
 w_list = np.linspace(-10, 10, 100)

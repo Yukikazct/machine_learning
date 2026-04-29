@@ -15,14 +15,13 @@ plt.rcParams["font.sans-serif"] = [
 ]
 plt.rcParams["axes.unicode_minus"] = False
 
-
 # 1. 核心函数定义
 def sigmoid(z):
     """sigmoid激活函数"""
     return 1 / (1 + np.exp(-z))
 
 def cross_entropy_loss(y, y_hat):
-    """交叉熵损失（防log(0)报错）"""
+    """交叉熵损失"""
     y_hat = np.clip(y_hat, 1e-10, 1 - 1e-10)
     return -np.sum(y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat))
 
@@ -36,6 +35,10 @@ def l2_reg_loss(y, x, w, lam):
 # 2. 线性可分实验数据
 x = np.array([-4, -3, -2, 1, 2, 5])
 y = np.array([0, 0, 0, 1, 1, 1])
+
+np.save("exp08_task2_x.npy", x)    # 保存线性可分特征x
+np.save("exp08_task2_y.npy", y)    # 保存线性可分标签y
+print("实验2数据集已保存：exp08_task2_x.npy、exp08_task2_y.npy")
 
 # 3. 无正则化：损失曲线（w发散）
 w_no_reg = np.linspace(-10, 5, 100)
